@@ -1,7 +1,6 @@
-from git_conventional_version.api import get_local_version
-from git_conventional_version.api import get_new_version
-from git_conventional_version.api import get_old_version
+from git_conventional_version.api import Api 
 from git_conventional_version.api import version_types
+from git import Repo
 import argparse
 import sys
 
@@ -26,12 +25,13 @@ def cli():
         help="Print current (old) version instead."
     )
     args = parser.parse_args()
+    api = Api(repo=Repo(search_parent_directories=True))
     if args.type == "local":
-        print(get_local_version())
+        print(api.get_local_version())
     elif args.old:
-        print(get_old_version(type=args.type))
+        print(api.get_old_version(type=args.type))
     else:
-        print(get_new_version(type=args.type))
+        print(api.get_new_version(type=args.type))
     sys.exit(0)
 
 
