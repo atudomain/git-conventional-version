@@ -31,4 +31,4 @@ def get_new_version(type: str) -> str:
 
 
 def get_local_version() -> str:
-    return _create_release.get_local_version_string()
+    return _create_release().get_local_version_string()
