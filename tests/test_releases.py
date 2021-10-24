@@ -34,9 +34,9 @@ def test_get_version_string_on_tagged_commit(git_repo_tagged_commit):
     release_class = FinalRelease
     release = release_class(git_repo_tagged_commit)
     old_version = release.get_old_version_string()
-    assert old_version == "1.0.0"
+    assert old_version == "3.0.0"
     new_version = release.get_new_version_string()
-    assert new_version == "1.0.0"
+    assert new_version == "3.0.0"
 
 
 @pytest.mark.parametrize(
@@ -83,6 +83,6 @@ def test_get_next_tagged_prerelease_version_string(
     release_class = ReleaseCandidateRelease
     release = release_class(git_repo_tagged_prerelease)
     new_version = release.get_new_version_string()
-    assert new_version == "1.0.0rc1"
+    assert new_version == "1.0.0rc3"
     old_version = release.get_old_version_string()
-    assert old_version == "1.0.0rc1"
+    assert old_version == "1.0.0rc3"

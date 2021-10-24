@@ -50,8 +50,12 @@ def git_repo_tagged_commit(tmpdir_factory):
     path = tmpdir_factory.mktemp("repo_tagged_commit")
     repo = Repo.init(path)
     _set_user(repo)
-    _commit_file(repo, path, "testfile1.txt", "feat(test): add test file")
+    _commit_file(repo, path, "testfile1.txt", "breaking change: test")
     repo.create_tag("1.0.0")
+    _commit_file(repo, path, "testfile2.txt", "breaking change: test 2")
+    repo.create_tag("2.0.0")
+    _commit_file(repo, path, "testfile3.txt", "breaking change: test 3")
+    repo.create_tag("3.0.0")
     yield repo
 
 
@@ -62,6 +66,10 @@ def git_repo_tagged_prerelease(tmpdir_factory):
     _set_user(repo)
     _commit_file(repo, path, "testfile1.txt", "breaking change: whatever")
     repo.create_tag("1.0.0rc1")
+    _commit_file(repo, path, "testfile2.txt", "breaking change: whatever 2")
+    repo.create_tag("1.0.0rc2")
+    _commit_file(repo, path, "testfile3.txt", "breaking change: whatever 3")
+    repo.create_tag("1.0.0rc3")
     yield repo
 
 

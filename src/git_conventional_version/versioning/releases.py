@@ -21,7 +21,7 @@ class Release:
     def get_old_version(self) -> Version:
         versions = self.get_versions()
         if len(versions) > 0:
-            return self.version_class.from_tag(versions[-1])
+            return self.version_class.from_tag(versions[0])
         else:
             return self.version_class()
 
