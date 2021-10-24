@@ -79,7 +79,7 @@ Convention is based on https://www.conventionalcommits.org/en/v1.0.0/ (it's good
 At the moment, only the following rules apply (I usually use only these but more can be added easily):
 - Start commit with 'fix:' or 'fix(.*):' to bump patch version.
 - Start commit with 'feat:' or 'feat(.*):' to bump minor version.
-- Include in the commit line including 'breaking change:' to bump major version.
+- Include in the commit line with 'breaking change:' to bump major version.
 
 ## Notices
 
