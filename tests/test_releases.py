@@ -68,8 +68,21 @@ def test_get_prerelease_version_string(git_repo_prerelease):
     assert new_version == "1.1.0rc1"
 
 
-def test_get_next_prerelease_version_string(git_repo_next_prerelease):
+def test_get_next_prerelease_version_string(
+    git_repo_next_prerelease
+):
     release_class = ReleaseCandidateRelease
     release = release_class(git_repo_next_prerelease)
     new_version = release.get_new_version_string()
     assert new_version == "1.1.0rc2"
+
+
+def test_get_next_tagged_prerelease_version_string(
+    git_repo_tagged_prerelease
+):
+    release_class = ReleaseCandidateRelease
+    release = release_class(git_repo_tagged_prerelease)
+    new_version = release.get_new_version_string()
+    assert new_version == "1.0.0rc1"
+    old_version = release.get_old_version_string()
+    assert old_version == "1.0.0rc1"

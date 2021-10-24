@@ -76,6 +76,12 @@ class PreRelease(Release):
 
     def get_new_version(self) -> Version:
         pre_release_version = self.get_old_version()
+        try:
+            if self.repo.head.commit.hexsha \
+            == self.repo.tag(pre_release_version).commit.hexsha:
+                return pre_release_version
+        except ValueError:
+            pass
         pre_release_version.numbers[3] += 1
         return pre_release_version
 

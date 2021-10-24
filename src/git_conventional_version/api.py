@@ -9,8 +9,8 @@ class InvalidReleaseTypeError(Exception):
     pass
 
 
-def _create_release(type: str) -> Release:
-    repo = Repo()
+def _create_release(type: str="final") -> Release:
+    repo = Repo(search_parent_directories=True)
     if type == "final":
         release = FinalRelease(repo)
     elif type == "rc":
@@ -31,4 +31,4 @@ def get_new_version(type: str) -> str:
 
 
 def get_local_version() -> str:
-    return FinalRelease(Repo()).get_local_version_string()
+    return _create_release.get_local_version_string()

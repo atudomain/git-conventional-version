@@ -56,6 +56,16 @@ def git_repo_tagged_commit(tmpdir_factory):
 
 
 @pytest.fixture(scope="session")
+def git_repo_tagged_prerelease(tmpdir_factory):
+    path = tmpdir_factory.mktemp("repo_tagged_prerelease")
+    repo = Repo.init(path)
+    _set_user(repo)
+    _commit_file(repo, path, "testfile1.txt", "breaking change: whatever")
+    repo.create_tag("1.0.0rc1")
+    yield repo
+
+
+@pytest.fixture(scope="session")
 def git_repo_conventional_commit(tmpdir_factory):
     path = tmpdir_factory.mktemp("repo_conventional_commit")
     repo = Repo.init(path)

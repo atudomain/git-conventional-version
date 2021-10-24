@@ -34,20 +34,17 @@ class Version:
 class FinalVersion(Version):
     pattern: str = r"^(\d+)\.(\d+)\.(\d+)$"
     str_format: str = "%d.%d.%d"
-
-    def __init__(
-        self, 
-        numbers: list = [0, 0, 0]
-    ) -> None:
+    def __init__(self, numbers: list = None) -> None:
         super().__init__(numbers=numbers)
+        if not numbers:
+            self.numbers = [0, 0, 0]
 
 
 class PreReleaseVersion(Version):
-    def __init__(
-        self, 
-        numbers: list = [0, 0, 0, 0]
-    ) -> None:
+    def __init__(self, numbers: list = None) -> None:
         super().__init__(numbers=numbers)
+        if not numbers:
+            self.numbers = [0, 0, 0, 0]
 
 
 class ReleaseCandidateVersion(PreReleaseVersion):
