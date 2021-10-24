@@ -5,7 +5,10 @@ from git_conventional_version.versioning.releases import ReleaseCandidateRelease
 from git import Repo
 
 
-class InvalidReleaseTypeError(Exception):
+version_types = ["final", "rc", "dev", "local"]
+
+
+class InvalidVersionTypeError(Exception):
     pass
 
 

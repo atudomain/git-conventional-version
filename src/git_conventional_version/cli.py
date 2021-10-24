@@ -1,6 +1,7 @@
 from git_conventional_version.api import get_local_version
 from git_conventional_version.api import get_new_version
 from git_conventional_version.api import get_old_version
+from git_conventional_version.api import version_types
 import argparse
 import sys
 
@@ -13,7 +14,7 @@ def cli():
         "-t", "--type",
         required=False,
         default="final",
-        choices=["final", "rc", "dev", "local"],
+        choices=version_types,
         type=str,
         help="Choose type of version."
     )
