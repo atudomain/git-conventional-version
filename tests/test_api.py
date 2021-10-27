@@ -193,3 +193,24 @@ def test_repo_with_rc_tag_since_final_tag(
     _commit_file(repo, "testfile3.txt", "feat(test): add another file")
 
     _compare_versions(repo, version_type, old_version, new_version)
+
+
+def test_get_changelog(repo):
+    api = Api(repo)
+    changelog = api.get_changelog()
+    assert changelog == "# CHANGELOG\n\n"
+
+    _commit_file(repo, "testfile1.txt", "feat(test): add test file")
+    repo.create_tag("1.0.0")
+    changelog = api.get_changelog()
+    assert changelog == "# CHANGELOG\n\n## 1.0.0\n\n- feat(test): add test file\n"
+
+    _commit_file(repo, "testfile2.txt", "feat(test): add another file")
+    repo.create_tag("1.1.0rc1")
+    changelog = api.get_changelog()
+    assert changelog == "# CHANGELOG\n\n## 1.1.0\n\n- feat(test): add another file\n\n## 1.0.0\n\n- feat(test): add test file\n"
+
+    _commit_file(repo, "testfile3.txt", "feat(test): add another file")
+    repo.create_tag("1.1.0")
+    changelog = api.get_changelog()
+    assert changelog == "# CHANGELOG\n\n## 1.1.0\n\n- feat(test): add another file\n- feat(test): add another file\n\n## 1.0.0\n\n- feat(test): add test file\n"

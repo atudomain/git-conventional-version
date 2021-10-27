@@ -35,5 +35,15 @@ def cli():
     sys.exit(0)
 
 
+def changelog():
+    parser = argparse.ArgumentParser(
+        description="Run on branch with version tags to print automatically generated changelog for new final version."
+    )
+    _ = parser.parse_args()
+    api = Api(repo=Repo(search_parent_directories=True))
+    print(api.get_changelog())
+    sys.exit(0)
+
+
 if __name__ == "__main__":
     cli()
