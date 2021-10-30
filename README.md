@@ -1,5 +1,7 @@
 # GIT-CONVENTIONAL-VERSION
 
+![ci-badge](https://github.com/atudomain/git-conventional-version/actions/workflows/github-actions.yml/badge.svg?branch=main)
+
 Find version automatically based on git tags and commit messages.
 
 The tool is very specific in its function, so it is very flexible. 
