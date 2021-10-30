@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.1
+
+- fix: python 3.6 compatibility
+
 ## 1.0.0
 
 - breaking change: mvp
