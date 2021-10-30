@@ -1,15 +1,21 @@
 from typing import List
-from git import Repo
 from git.refs.tag import Tag
+from git import Repo
 from git_conventional_version.versioning.conventional import Conventional 
-from git_conventional_version.versioning.versions import DevelopmentalVersion
-from git_conventional_version.versioning.versions import FinalVersion
-from git_conventional_version.versioning.versions import ReleaseCandidateVersion
-from git_conventional_version.versioning.versions import Version
+from git_conventional_version.versioning.versions import \
+    DevelopmentalVersion, \
+    FinalVersion, \
+    ReleaseCandidateVersion, \
+    Version
 import re
 
 
 class Release:
+    """Handles specific type of version.
+
+    Release implementations should have version_class defined.
+    Each Release has corresponding Version class defined.
+    """
     version_class = Version
 
     def __init__(
@@ -20,8 +26,8 @@ class Release:
         self.conventional = Conventional(self.repo)
 
     def get_old_version(self) -> Version:
-        version_strings = self.get_version_strings()
-        version_strings = self.sort_version_strings(version_strings)
+        version_strings = self._get_version_strings()
+        version_strings = self._sort_version_strings(version_strings)
         if len(version_strings) > 0:
             return self.version_class.from_tag(version_strings[0])
         else:
@@ -33,10 +39,10 @@ class Release:
     def get_version_tags(self) -> List[Tag]:
         return [tag for tag in self.repo.tags if re.search(self.version_class.pattern, str(tag))]
 
-    def get_version_strings(self) -> List[str]:
+    def _get_version_strings(self) -> List[str]:
         return [str(vt) for vt in self.get_version_tags()]
 
-    def sort_version_strings(self, version_strings: List[str]) -> List[str]:
+    def _sort_version_strings(self, version_strings: List[str]) -> List[str]:
         return sorted(
             version_strings,
             key=lambda x: tuple(re.findall(r'\d+', x)),
@@ -45,10 +51,16 @@ class Release:
 
 
 class FinalRelease(Release):
+    """Handles final versions.
+    """
     version_class = FinalVersion
 
 
 class PreRelease(Release):
+    """Handles general pre-release versions like rc or dev.
+
+    Needs subclassing.
+    """
     def __init__(
         self,
         repo: Repo
@@ -79,8 +91,12 @@ class PreRelease(Release):
 
 
 class ReleaseCandidateRelease(PreRelease):
+    """Handles pre-release versions specifically.
+    """
     version_class = ReleaseCandidateVersion
 
 
 class DevelopmentalRelease(PreRelease):
+    """Handles developmental versions specifically.
+    """
     version_class = DevelopmentalVersion

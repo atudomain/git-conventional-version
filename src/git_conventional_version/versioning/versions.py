@@ -1,8 +1,16 @@
-from abc import abstractclassmethod
 import re
 
 
 class Version:
+    """Represents specific type of version.
+
+    Each Version implementation should have defined:
+    - pattern,
+    - str_format,
+    - default value for numbers attribute that is consistent with above.
+
+    Version classes are used by analogical Release classes.
+    """
     pattern: str
     str_format: str
 
@@ -13,7 +21,7 @@ class Version:
         self.numbers = numbers
 
     @classmethod
-    def validate_tag(cls, tag: str) -> None:
+    def _validate_tag(cls, tag: str) -> None:
         if not re.search(cls.pattern, tag):
             raise Exception(f"Tag {tag} does not match pattern {cls.pattern}.")
 
@@ -24,7 +32,7 @@ class Version:
 
     @classmethod
     def from_tag(cls, tag: str) -> "Version":
-        cls.validate_tag(tag)
+        cls._validate_tag(tag)
         return cls._extract_version(tag)
 
     def __str__(self):
@@ -32,6 +40,8 @@ class Version:
 
 
 class FinalVersion(Version):
+    """Represents final version.
+    """
     pattern: str = r"^(\d+)\.(\d+)\.(\d+)$"
     str_format: str = "%d.%d.%d"
     def __init__(self, numbers: list = None) -> None:
@@ -41,6 +51,10 @@ class FinalVersion(Version):
 
 
 class PreReleaseVersion(Version):
+    """Represents pre-release types of version.
+
+    Needs subclassing.
+    """
     def __init__(self, numbers: list = None) -> None:
         super().__init__(numbers=numbers)
         if not numbers:
@@ -48,10 +62,14 @@ class PreReleaseVersion(Version):
 
 
 class ReleaseCandidateVersion(PreReleaseVersion):
+    """Represents release candidate version.
+    """
     pattern: str = r"^(\d+)\.(\d+)\.(\d+)rc(\d+)$"
     str_format: str = "%d.%d.%drc%d"
 
 
 class DevelopmentalVersion(PreReleaseVersion):
+    """Represents developmental version.
+    """
     pattern: str = r"^(\d+)\.(\d+)\.(\d+)dev(\d+)$"
     str_format: str = "%d.%d.%ddev%d"

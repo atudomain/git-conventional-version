@@ -6,6 +6,8 @@ import sys
 
 
 def cli():
+    """Entrypoint for gcv command line tool.
+    """
     parser = argparse.ArgumentParser(
         description="Print automatically bumped version based on git tags and messages."
     )
@@ -36,6 +38,8 @@ def cli():
 
 
 def changelog():
+    """Entrypoint for gcv-log command line tool.
+    """
     parser = argparse.ArgumentParser(
         description="Run on branch with version tags to print automatically generated changelog for new final version."
     )
@@ -43,7 +47,3 @@ def changelog():
     api = Api(repo=Repo(search_parent_directories=True))
     print(api.get_changelog())
     sys.exit(0)
-
-
-if __name__ == "__main__":
-    cli()

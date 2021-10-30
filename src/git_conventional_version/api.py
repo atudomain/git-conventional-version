@@ -1,12 +1,11 @@
 from git_conventional_version.changelog.changelog import Changelog
 from git_conventional_version.versioning.conventional import Conventional
-from git_conventional_version.versioning.releases import DevelopmentalRelease
-from git_conventional_version.versioning.releases import FinalRelease
-from git_conventional_version.versioning.releases import Release
-from git_conventional_version.versioning.releases import ReleaseCandidateRelease
+from git_conventional_version.versioning.releases import \
+    DevelopmentalRelease, \
+    FinalRelease, \
+    Release, \
+    ReleaseCandidateRelease
 from git import Repo
-
-from git_conventional_version.versioning.versions import FinalVersion
 
 
 version_types = ["final", "rc", "dev", "local"]
@@ -17,6 +16,8 @@ class InvalidVersionTypeError(Exception):
 
 
 class Api:
+    """Provides interface for main functionalities.
+    """
     def __init__(
         self,
         repo: Repo

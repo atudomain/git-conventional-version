@@ -1,8 +1,9 @@
 import pytest
 
-from git_conventional_version.versioning.versions import FinalVersion
-from git_conventional_version.versioning.versions import ReleaseCandidateVersion
-from git_conventional_version.versioning.versions import DevelopmentalVersion
+from git_conventional_version.versioning.versions import \
+    FinalVersion, \
+    ReleaseCandidateVersion, \
+    DevelopmentalVersion
 
 
 @pytest.mark.parametrize(
@@ -21,8 +22,8 @@ def test_version_classes(
 ):
     version = version_class(numbers)
     assert str(version) == valid_version
-    version_class.validate_tag(valid_version)
+    version_class._validate_tag(valid_version)
     with pytest.raises(Exception):
-        version_class.validate_tag(invalid_version)
+        version_class._validate_tag(invalid_version)
     version = version_class.from_tag(valid_version)
     assert str(version) == valid_version

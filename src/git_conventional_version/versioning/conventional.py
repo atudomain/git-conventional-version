@@ -6,6 +6,8 @@ import re
 
 
 class Conventional:
+    """Handles incrementing versions based on commit messages.
+    """
     major_patterns = [r"breaking change:"]
     minor_patterns = [r"^feat(\(.*\))?:"]
     patch_patterns = [r"^fix(\(.*\))?:"]
@@ -37,6 +39,19 @@ class Conventional:
         return False
 
     def _get_messages(self, version: Version) -> List[str]:
+        """Get commit messages that are needed to check for increment.
+
+        That means get commits since last final version and
+        if it is only on different branch, get commits on current
+        branch that are not present on the other branch since that
+        final version commit.
+
+        Args:
+            version: version to check bump for.
+
+        Returns:
+            List of commit messages.
+        """
         messages = []
         version_string = str(version)
         active_branch =self.repo.active_branch
