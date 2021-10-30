@@ -81,6 +81,15 @@ At the moment, only the following rules apply (I usually use only these but more
 - Start commit with 'feat:' or 'feat(.*):' to bump minor version.
 - Include in the commit line with 'breaking change:' to bump major version.
 
+## Automatic changelog
+
+On branch where your version tags are present, you can generate changelog:
+```
+gcv-log
+```
+Full changelog is generated and printed to stdout. You can redirect it to a file.
+Assumes that you are about to release next version if not on commit with final version.
+
 ## Notices
 
 Automatically handling many types of version tags in git is more complicated than it initially seems like.
