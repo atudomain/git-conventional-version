@@ -1,6 +1,8 @@
 import pytest
 
 from git_conventional_version.versioning.versions import \
+    AlphaVersion, \
+    BetaVersion, \
     FinalVersion, \
     ReleaseCandidateVersion, \
     DevelopmentalVersion
@@ -11,7 +13,9 @@ from git_conventional_version.versioning.versions import \
     [
         (FinalVersion, [1,2,3], "1.2.3", "1.2"),
         (ReleaseCandidateVersion, [1,2,3,4], "1.2.3rc4", "1.2.3"),
-        (DevelopmentalVersion, [1,2,3,4], "1.2.3dev4", "1.2.3.4", )
+        (DevelopmentalVersion, [1,2,3,4], "1.2.3dev4", "1.2.3.4", ),
+        (AlphaVersion, [1,2,3,4], "1.2.3a4", "1.2.3.4", ),
+        (BetaVersion, [1,2,3,4], "1.2.3b4", "1.2.3.4", ),
     ]
 )
 def test_version_classes(

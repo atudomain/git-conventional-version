@@ -69,6 +69,14 @@ Format `\d+\.\d+\.d+rc\d+` ie. `1.0.0rc1`.
 
 Format `\d+\.\d+\.d+dev\d+` ie. `1.0.0dev1`.
 
+-    - Alpha version 
+
+Format `\d+\.\d+\.d+a\d+` ie. `1.0.0a1`.
+
+-    - Beta version 
+
+Format `\d+\.\d+\.d+b\d+` ie. `1.0.0b1`.
+
 - Local version
 
 Also, local version can be created from commit sha and old version: `\d+\.\d+\.d\+.+` ie. `0.0.0+79ad`.

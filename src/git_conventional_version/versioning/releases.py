@@ -3,6 +3,8 @@ from git.refs.tag import Tag
 from git import Repo
 from git_conventional_version.versioning.conventional import Conventional 
 from git_conventional_version.versioning.versions import \
+    AlphaVersion, \
+    BetaVersion, \
     DevelopmentalVersion, \
     FinalVersion, \
     ReleaseCandidateVersion, \
@@ -100,3 +102,15 @@ class DevelopmentalRelease(PreRelease):
     """Handles developmental versions specifically.
     """
     version_class = DevelopmentalVersion
+
+
+class AlphaRelease(PreRelease):
+    """Handles beta versions specifically.
+    """
+    version_class = AlphaVersion
+
+
+class BetaRelease(PreRelease):
+    """Handles beta versions specifically.
+    """
+    version_class = BetaVersion

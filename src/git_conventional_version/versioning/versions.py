@@ -73,3 +73,17 @@ class DevelopmentalVersion(PreReleaseVersion):
     """
     pattern: str = r"^(\d+)\.(\d+)\.(\d+)dev(\d+)$"
     str_format: str = "%d.%d.%ddev%d"
+
+
+class AlphaVersion(PreReleaseVersion):
+    """Represents alpha version.
+    """
+    pattern: str = r"^(\d+)\.(\d+)\.(\d+)a(\d+)$"
+    str_format: str = "%d.%d.%da%d"
+
+
+class BetaVersion(PreReleaseVersion):
+    """Represents beta version.
+    """
+    pattern: str = r"^(\d+)\.(\d+)\.(\d+)b(\d+)$"
+    str_format: str = "%d.%d.%db%d"

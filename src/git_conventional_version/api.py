@@ -1,6 +1,8 @@
 from git_conventional_version.changelog.changelog import Changelog
 from git_conventional_version.versioning.conventional import Conventional
 from git_conventional_version.versioning.releases import \
+    AlphaRelease, \
+    BetaRelease, \
     DevelopmentalRelease, \
     FinalRelease, \
     Release, \
@@ -8,7 +10,7 @@ from git_conventional_version.versioning.releases import \
 from git import Repo
 
 
-version_types = ["final", "rc", "dev", "local"]
+version_types = ["final", "rc", "dev", "beta", "alpha", "local"]
 
 
 class InvalidVersionTypeError(Exception):
@@ -31,6 +33,10 @@ class Api:
             release = ReleaseCandidateRelease(self.repo)
         elif type == "dev":
             release = DevelopmentalRelease(self.repo)
+        elif type == "beta":
+            release = BetaRelease(self.repo)
+        elif type == "alpha":
+            release = AlphaRelease(self.repo)
         else:
             raise Exception(f"Type: '{type}' is not valid.")
         return release
