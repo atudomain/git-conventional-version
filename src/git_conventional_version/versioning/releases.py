@@ -84,7 +84,7 @@ class PreRelease(Release):
         pre_release_version = self.get_old_version()
         try:
             if self.repo.head.commit.hexsha \
-            == self.repo.tag(pre_release_version).commit.hexsha:
+            == self.repo.tag(str(pre_release_version)).commit.hexsha:
                 return pre_release_version
         except ValueError:
             pass
