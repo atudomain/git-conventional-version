@@ -17,12 +17,12 @@ class Version:
         if not re.search(cls.pattern, tag):
             raise Exception(f"Tag {tag} does not match pattern {cls.pattern}.")
 
-    @abstractclassmethod
+    @classmethod
     def _extract_version(cls, tag: str) -> "Version":
         groups = re.search(cls.pattern, tag).groups()
         return cls([int(group) for group in groups])
 
-    @abstractclassmethod
+    @classmethod
     def from_tag(cls, tag: str) -> "Version":
         cls.validate_tag(tag)
         return cls._extract_version(tag)
