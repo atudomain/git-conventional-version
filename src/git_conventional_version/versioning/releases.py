@@ -47,7 +47,7 @@ class Release:
     def _sort_version_strings(self, version_strings: List[str]) -> List[str]:
         return sorted(
             version_strings,
-            key=lambda x: tuple(re.findall(r'\d+', x)),
+            key=lambda x: tuple([int(i) for i in re.findall(r'\d+', x)]),
             reverse=True
         )
 
